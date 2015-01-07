@@ -1,20 +1,16 @@
 fn main() {
 	let total_months = 86i;
-	let lifespan = 20i;
+	const LIFESPAN: uint = 20u;
 
-	let mut rabbit_ages = Vec::new();
-
-	rabbit_ages.push(1i);
-	for x in range(1, lifespan) {
-		rabbit_ages.push(0i);
-	}
+	let mut rabbit_ages = [0i; LIFESPAN];
+	rabbit_ages[0] = 1;
 
 	//println!("Month {}: {}", 1i, rabbit_ages);
 
-	for month in range(1, total_months) {
+	for _ in range(1, total_months) {
 		let mut new_rabbits = rabbit_ages[rabbit_ages.len() - 1];
 
-		for index in range(1, lifespan).rev() {
+		for index in range(1, LIFESPAN).rev() {
 			let aged_rabbits = rabbit_ages[(index as uint) - 1];
 
 			if index > 1 {
@@ -31,7 +27,7 @@ fn main() {
 	}
 
 	let mut total_rabbits = 0i;
-	for num in rabbit_ages.drain() {
+	for &num in rabbit_ages.iter() {
 		total_rabbits += num;
 	}
 
